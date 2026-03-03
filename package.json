@@ -1,5 +1,5 @@
 {
-  "name": "crash-course-2026",
+  "name": "pokedex",
   "main": "expo-router/entry",
   "version": "1.0.0",
   "scripts": {
