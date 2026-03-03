@@ -1,0 +1,18 @@
+{
+  "React Page Component": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": ["rpc"],
+    "body": [
+      "import { Text, View } from \"react-native\"",
+      "",
+      "export default function ${1:${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}}() {",
+      "  return (",
+      "    <View>",
+      "      <Text> Welcome to $TM_FILENAME</Text>",
+      "    </View>",
+      "  );",
+      "}",
+    ],
+    "description": "Create a React functional component for pages",
+  },
+}
