@@ -24,12 +24,19 @@ export interface PokemonAbility {
   ability: GenericResource;
 }
 
+interface PokemonSpritesVariants {
+  front_default: string | null;
+  front_shiny: string | null;
+  back_default: string | null;
+  back_shiny: string | null;
+}
+
 interface PokemonSprites {
   front_default: string | null;
   front_shiny: string | null;
   back_default: string | null;
   back_shiny: string | null;
-  other?: Record<string, unknown>;
+  other?: Record<string, PokemonSpritesVariants>;
   versions?: Record<string, unknown>;
 }
 
