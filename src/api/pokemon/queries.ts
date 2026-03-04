@@ -1,6 +1,6 @@
 import http from "@/lib/http";
 import { Pokemon } from "@/types/pokemon";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 interface PokemonQueryResponse {
   count: number;
@@ -9,19 +9,29 @@ interface PokemonQueryResponse {
   results: Pokemon[];
 }
 
-export function usePokemons(limit: number = 20, offset: number = 0) {
+export function usePokemons() {
   return useQuery({
-    queryKey: ["pokemon", limit, offset],
+    queryKey: ["pokemon"],
     queryFn: async () => {
       const response = await http.get<PokemonQueryResponse>(
         "https://pokeapi.co/api/v2/pokemon",
-        {
-          limit,
-          offset,
-        },
       );
 
       return response.data;
     },
+  });
+}
+
+export function useInfinitePokemons() {
+  return useInfiniteQuery({
+    queryKey: ["pokemon"],
+    queryFn: async ({ pageParam }) => {
+      const response = await http.get<PokemonQueryResponse>(pageParam);
+      return response.data;
+    },
+
+    initialPageParam: "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20",
+    getNextPageParam: ({ next }) => next,
+    getPreviousPageParam: ({ previous }) => previous,
   });
 }
