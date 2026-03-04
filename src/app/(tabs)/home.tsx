@@ -1,7 +1,7 @@
 import { usePokemons } from "@/api/pokemon/queries";
 import { extractPokemonId } from "@/utils/extractors";
 import { formatPokemonSpriteUrl } from "@/utils/formatters";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Image, Pressable, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -11,7 +11,7 @@ export default function Index() {
     isError: isPokemonError,
   } = usePokemons();
 
-  const { top } = useSafeAreaInsets();
+  const insets = useSafeAreaInsets();
 
   if (isPokemonLoading) return;
   if (isPokemonError) return;
@@ -19,26 +19,59 @@ export default function Index() {
 
   return (
     <View
-      style={{ paddingTop: top }}
-      className="bg-black justify-center items-center"
+      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
+      className="px-6 flex-1"
     >
       <FlatList
-        data={pokemons.results}
-        renderItem={({ item }) => (
+        className="flex-1"
+        ListHeaderComponent={() => (
           <View>
-            <Image
-              source={{
-                uri: formatPokemonSpriteUrl(extractPokemonId(item.url)),
-              }}
-              width={50}
-              height={50}
-            />
-            <Text>{item.name}</Text>
+            <Text className="text-3xl mt-10 mb-2">Pokemons</Text>
           </View>
         )}
+        data={pokemons.results}
+        renderItem={({ item, index }) => (
+          <PokemonItem name={item.name} url={item.url} index={index} />
+        )}
+        contentContainerStyle={{ gap: 8, paddingBottom: 70 }}
       />
-
-      <Text>Edit app/index.tsx to edit this screen.</Text>
     </View>
+  );
+}
+
+interface PokemonItemProps {
+  name: string;
+  url: string;
+  index: number;
+}
+
+/**
+ * Displays a single Pokemon item in a list format.
+ *
+ * @example
+ * <PokemonItem name="Pikachu" url="https://pokeapi.co/api/v2/pokemon/25/" index={0} />
+ */
+export function PokemonItem(props: PokemonItemProps) {
+  const { name, url, index } = props;
+
+  return (
+    <Pressable className="border border-gray-300/70 rounded-lg p-4 flex-row item-center gap-x-2 active:bg-gray-50">
+      <Image
+        className="bg-purple-50 rounded-full"
+        source={{
+          uri: formatPokemonSpriteUrl(extractPokemonId(url)),
+        }}
+        width={50}
+        height={50}
+      />
+      <View className="flex-1 justify-center">
+        <Text className="font-semibold text-lg capitalize flex-1 text-gray-900">
+          {name}
+        </Text>
+        <Text className="font-light text-sm capitalize flex-1 text-gray-700">
+          #{index + 1}
+        </Text>
+      </View>
+    </Pressable>
   );
 }
