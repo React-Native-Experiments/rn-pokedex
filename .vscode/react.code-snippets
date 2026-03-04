@@ -15,4 +15,22 @@
     ],
     "description": "Create a React functional component for pages",
   },
+
+  "React Functional Component": {
+    "scope": "typescriptreact,javascriptreact",
+    "prefix": ["rfc"],
+    "body": [
+      "interface ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Props {",
+      "}",
+      "",
+      "export function ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}(props: ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/}Props) {",
+      "  return (",
+      "    <View>",
+      "      $0",
+      "    </View>",
+      "  );",
+      "}",
+    ],
+    "description": "Create a React functional component from filename",
+  },
 }
