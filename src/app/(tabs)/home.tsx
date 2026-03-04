@@ -31,7 +31,7 @@ export default function Index() {
         )}
         data={pokemons.results}
         renderItem={({ item, index }) => (
-          <PokemonItem name={item.name} url={item.url} index={index} />
+          <PokemonItem id={extractPokemonId(item.url)} name={item.name} />
         )}
         contentContainerStyle={{ gap: 8, paddingBottom: 70 }}
       />
@@ -40,9 +40,8 @@ export default function Index() {
 }
 
 interface PokemonItemProps {
+  id: string;
   name: string;
-  url: string;
-  index: number;
 }
 
 /**
@@ -52,14 +51,14 @@ interface PokemonItemProps {
  * <PokemonItem name="Pikachu" url="https://pokeapi.co/api/v2/pokemon/25/" index={0} />
  */
 export function PokemonItem(props: PokemonItemProps) {
-  const { name, url, index } = props;
+  const { name, id } = props;
 
   return (
     <Pressable className="border border-gray-300/70 rounded-lg p-4 flex-row item-center gap-x-2 active:bg-gray-50">
       <Image
         className="bg-purple-50 rounded-full"
         source={{
-          uri: formatPokemonSpriteUrl(extractPokemonId(url)),
+          uri: formatPokemonSpriteUrl(id),
         }}
         width={50}
         height={50}
@@ -69,7 +68,7 @@ export function PokemonItem(props: PokemonItemProps) {
           {name}
         </Text>
         <Text className="font-light text-sm capitalize flex-1 text-gray-700">
-          #{index + 1}
+          #{id}
         </Text>
       </View>
     </Pressable>
