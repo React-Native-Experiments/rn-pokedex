@@ -1,6 +1,4 @@
-// https://pokeapi.co/api/v2/{endpoint}/
-
-import { Pokemon } from "@/types/entities";
+import { Pokemon } from "@/types/pokemon";
 import { useQuery } from "@tanstack/react-query";
 
 export function usePokemons() {
