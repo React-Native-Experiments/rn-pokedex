@@ -19,12 +19,8 @@ export default function Index() {
 
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        paddingTop: top,
-      }}
+      style={{ paddingTop: top }}
+      className="bg-black justify-center items-center"
     >
       <FlatList
         data={pokemons.results}
