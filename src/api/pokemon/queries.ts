@@ -1,22 +1,27 @@
+import http from "@/lib/http";
 import { Pokemon } from "@/types/pokemon";
 import { useQuery } from "@tanstack/react-query";
 
-export function usePokemons() {
+interface PokemonQueryResponse {
+  count: number;
+  next: string | null;
+  previous: string | null;
+  results: Pokemon[];
+}
+
+export function usePokemons(limit: number = 20, offset: number = 0) {
   return useQuery({
-    queryKey: ["pokemon"],
+    queryKey: ["pokemon", limit, offset],
     queryFn: async () => {
-      const response = await fetch("https://pokeapi.co/api/v2/pokemon");
+      const response = await http.get<PokemonQueryResponse>(
+        "https://pokeapi.co/api/v2/pokemon",
+        {
+          limit,
+          offset,
+        },
+      );
 
-      if (!response.ok) {
-        throw new Error(response.status.toString());
-      }
-
-      return response.json() as Promise<{
-        count: number;
-        next: string | null;
-        previous: string | null;
-        results: Pokemon[];
-      }>;
+      return response.data;
     },
   });
 }
