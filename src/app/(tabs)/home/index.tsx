@@ -1,7 +1,8 @@
 import { useInfinitePokemons } from "@/api/pokemon/queries";
 import { extractPokemonId } from "@/utils/extractors";
 import { formatPokemonSpriteUrl } from "@/utils/formatters";
-import { FlatList, Image, Pressable, Text, View } from "react-native";
+import { Link } from "expo-router";
+import { FlatList, Image, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -52,13 +53,19 @@ interface PokemonItemProps {
  * Displays a single Pokemon item in a list format.
  *
  * @example
- * <PokemonItem name="Pikachu" url="https://pokeapi.co/api/v2/pokemon/25/" index={0} />
+ * <PokemonItem id="0" name="Pikachu" />
  */
 export function PokemonItem(props: PokemonItemProps) {
   const { name, id } = props;
 
   return (
-    <Pressable className="border border-gray-300/70 rounded-lg p-4 flex-row item-center gap-x-2 active:bg-gray-50">
+    <Link
+      className="border border-gray-300/70 rounded-lg p-4 flex-row item-center gap-x-2 active:bg-gray-50"
+      href={{
+        pathname: "/(tabs)/home/[pokemon_id]",
+        params: { pokemon_id: id },
+      }}
+    >
       <Image
         className="bg-purple-50 rounded-full"
         source={{
@@ -75,6 +82,6 @@ export function PokemonItem(props: PokemonItemProps) {
           #{id}
         </Text>
       </View>
-    </Pressable>
+    </Link>
   );
 }
