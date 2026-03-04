@@ -1,4 +1,4 @@
-import { usePokemons } from "@/api/pokemon/queries";
+import { useInfinitePokemons } from "@/api/pokemon/queries";
 import { extractPokemonId } from "@/utils/extractors";
 import { formatPokemonSpriteUrl } from "@/utils/formatters";
 import { FlatList, Image, Pressable, Text, View } from "react-native";
@@ -6,16 +6,17 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
   const {
-    data: pokemons,
+    data: infinitePokemons,
     isLoading: isPokemonLoading,
     isError: isPokemonError,
-  } = usePokemons();
+    fetchNextPage,
+  } = useInfinitePokemons();
 
   const insets = useSafeAreaInsets();
 
   if (isPokemonLoading) return;
   if (isPokemonError) return;
-  if (!pokemons) return;
+  if (!infinitePokemons) return;
 
   return (
     <View
@@ -29,11 +30,14 @@ export default function Index() {
             <Text className="text-3xl mt-10 mb-2">Pokemons</Text>
           </View>
         )}
-        data={pokemons.results}
+        data={infinitePokemons.pages.flatMap((p) => p.results)}
         renderItem={({ item, index }) => (
           <PokemonItem id={extractPokemonId(item.url)} name={item.name} />
         )}
+        keyExtractor={(item) => item.url}
         contentContainerStyle={{ gap: 8, paddingBottom: 70 }}
+        onEndReached={() => fetchNextPage()}
+        onEndReachedThreshold={0.5}
       />
     </View>
   );
