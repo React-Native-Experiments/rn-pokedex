@@ -1,6 +1,6 @@
 import { usePokemon } from "@/api/pokemon/queries";
 import { Progress } from "@/components/ui/Progress";
-import { STAT_COLORS, STAT_LABELS } from "@/constants/pokemon";
+import { STAT_COLORS, STAT_LABELS, getTypeColor } from "@/constants/pokemon";
 import { useLocalSearchParams } from "expo-router";
 import { ColorValue, Image, ScrollView, Text, View } from "react-native";
 
@@ -16,12 +16,17 @@ export default function PokemonId() {
   if (isError) return;
   if (!pokemon) return;
 
+  const typeColor = getTypeColor(pokemon.types[0].type.name);
+
   return (
     <ScrollView
       className="flex-1"
       contentContainerStyle={{ minHeight: "100%" }}
     >
-      <View className="bg-pokemon-grass pt-14 pb-20 items-center justify-center rounded-b-[40] gap-3">
+      <View
+        className="pt-14 pb-20 items-center justify-center rounded-b-[40] gap-3"
+        style={{ backgroundColor: typeColor }}
+      >
         <Text className="capitalize text-white text-3xl font-bold">
           {pokemon.name}
         </Text>

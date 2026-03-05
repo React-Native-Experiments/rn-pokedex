@@ -36,3 +36,7 @@ export const TYPE_COLORS = {
   steel: "#B8B8D0",
   fairy: "#EE99AC",
 };
+
+export function getTypeColor(type: string): string {
+  return TYPE_COLORS[type as keyof typeof TYPE_COLORS] ?? TYPE_COLORS.normal;
+}
