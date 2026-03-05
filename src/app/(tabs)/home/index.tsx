@@ -1,11 +1,10 @@
 import { useInfinitePokemons } from "@/api/pokemon/queries";
+import { PokemonItem } from "@/components/pokemon/PokemonItem";
+import { PokemonList } from "@/components/pokemon/PokemonList";
 import { StateError } from "@/components/ui/StateError";
 import { StateLoading } from "@/components/ui/StateLoading";
 import { extractPokemonId } from "@/utils/extractors";
-import { formatPokemonSpriteUrl } from "@/utils/formatters";
-import { Image as ExpoImage } from "expo-image";
-import { Link } from "expo-router";
-import { FlatList, Text, View } from "react-native";
+import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -29,62 +28,13 @@ export default function Index() {
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
       className="px-6 flex-1"
     >
-      <FlatList
-        className="flex-1"
-        ListHeaderComponent={() => (
-          <View>
-            <Text className="text-3xl mt-10 mb-2">Pokemons</Text>
-          </View>
-        )}
+      <PokemonList
         data={infinitePokemons.pages.flatMap((p) => p.results)}
-        renderItem={({ item, index }) => (
+        renderItem={({ item }) => (
           <PokemonItem id={extractPokemonId(item.url)} name={item.name} />
         )}
-        keyExtractor={(item) => item.url}
-        contentContainerStyle={{ gap: 8, paddingBottom: 70 }}
         onEndReached={() => fetchNextPage()}
-        onEndReachedThreshold={0.5}
       />
     </View>
-  );
-}
-
-interface PokemonItemProps {
-  id: string;
-  name: string;
-}
-
-/**
- * Displays a single Pokemon item in a list format.
- *
- * @example
- * <PokemonItem id="0" name="Pikachu" />
- */
-export function PokemonItem(props: PokemonItemProps) {
-  const { name, id } = props;
-
-  return (
-    <Link
-      className="border border-gray-300/70 rounded-lg p-4 flex-row item-center gap-x-2 active:bg-gray-50"
-      href={{
-        pathname: "/(tabs)/home/[pokemon_id]",
-        params: { pokemon_id: id },
-      }}
-    >
-      <ExpoImage
-        className="bg-purple-50 rounded-full"
-        source={formatPokemonSpriteUrl(id)}
-        style={{ width: 50, height: 50 }}
-        transition={200}
-      />
-      <View className="flex-1 justify-center">
-        <Text className="font-semibold text-lg capitalize flex-1 text-gray-900">
-          {name}
-        </Text>
-        <Text className="font-light text-sm flex-1 text-gray-700">
-          #{id.padStart(4, "0")}
-        </Text>
-      </View>
-    </Link>
   );
 }
