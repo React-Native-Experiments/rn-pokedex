@@ -3,6 +3,8 @@ import { Progress } from "@/components/ui/Progress";
 import { StateError } from "@/components/ui/StateError";
 import { StateLoading } from "@/components/ui/StateLoading";
 import { STAT_COLORS, STAT_LABELS, getTypeColor } from "@/constants/pokemon";
+import { isMobile } from "@/lib/platform";
+import { cn } from "@/utils/css";
 import { Image as ExpoImage } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import { ColorValue, ScrollView, Text, View } from "react-native";
@@ -48,7 +50,12 @@ export default function PokemonId() {
           <View className="flex-row gap-2">
             {pokemon.types.map((t, idx) => (
               <View className="bg-white/30 rounded-full px-3 py-1" key={idx}>
-                <Text className="uppercase text-xs text-white font-black shadow-md">
+                <Text
+                  className={cn(
+                    "uppercase text-xs text-white font-black",
+                    isMobile && "shadow-sm",
+                  )}
+                >
                   {t.type.name}
                 </Text>
               </View>
@@ -66,7 +73,6 @@ export default function PokemonId() {
         </View>
 
         <View className="p-6 gap-4">
-          {/* About */}
           <View className="flex-row justify-around">
             <View className="items-center">
               <Text className="text-gray-500 text-xs">Weight</Text>
@@ -82,9 +88,6 @@ export default function PokemonId() {
             </View>
           </View>
 
-          {/* TODO: Abilities section */}
-
-          {/* Base Stats */}
           <Text className="font-bold text-lg">Base Stats</Text>
 
           {pokemon.stats.map((s) => (
