@@ -7,6 +7,7 @@ export default function RootLayout() {
       screenOptions={{
         title: "Pokedex",
         tabBarActiveTintColor: "#644AC9",
+        headerShown: false, // web
       }}
     >
       <Tabs.Screen

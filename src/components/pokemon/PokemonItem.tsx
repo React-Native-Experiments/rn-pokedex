@@ -13,7 +13,7 @@ export function PokemonItem(props: PokemonItemProps) {
 
   return (
     <Link
-      className="border border-gray-300/70 rounded-lg p-4 flex-row item-center gap-x-2 active:bg-gray-50"
+      className="border border-gray-300/70 rounded-lg p-4 flex flex-row item-center gap-x-2 active:bg-gray-50"
       href={{
         pathname: "/(tabs)/home/[pokemon_id]",
         params: { pokemon_id: id },
