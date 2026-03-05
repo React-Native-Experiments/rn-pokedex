@@ -19,68 +19,74 @@ export default function PokemonId() {
   const typeColor = getTypeColor(pokemon.types[0].type.name);
 
   return (
-    <ScrollView
-      className="flex-1"
-      contentContainerStyle={{ minHeight: "100%" }}
-    >
+    <View className="flex-1">
       <View
-        className="pt-14 pb-20 items-center justify-center rounded-b-[40] gap-3"
+        className="absolute top-0 left-0 right-0 h-1/2"
         style={{ backgroundColor: typeColor }}
+      />
+      <ScrollView
+        className="flex-1"
+        contentContainerStyle={{ minHeight: "100%", backgroundColor: "white" }}
       >
-        <Text className="capitalize text-white text-3xl font-bold">
-          {pokemon.name}
-        </Text>
+        <View
+          className="pt-14 pb-20 items-center justify-center rounded-b-[40] gap-3 bg-white"
+          style={{ backgroundColor: typeColor }}
+        >
+          <Text className="capitalize text-white text-3xl font-bold">
+            {pokemon.name}
+          </Text>
 
-        <View className="flex-row gap-2">
-          {pokemon.types.map((t, idx) => (
-            <View className="bg-white/30 rounded-full px-3 py-1" key={idx}>
-              <Text className="uppercase text-xs text-white font-black shadow-md">
-                {t.type.name}
+          <View className="flex-row gap-2">
+            {pokemon.types.map((t, idx) => (
+              <View className="bg-white/30 rounded-full px-3 py-1" key={idx}>
+                <Text className="uppercase text-xs text-white font-black shadow-md">
+                  {t.type.name}
+                </Text>
+              </View>
+            ))}
+          </View>
+
+          {hasArtwork && (
+            <Image
+              source={{ uri: artwork, width: 200, height: 200 }}
+              resizeMode="contain"
+            />
+          )}
+        </View>
+
+        <View className="p-6 gap-4">
+          {/* About */}
+          <View className="flex-row justify-around">
+            <View className="items-center">
+              <Text className="text-gray-500 text-xs">Weight</Text>
+              <Text className="text-gray-900 font-semibold">
+                {(pokemon.weight / 10).toFixed(1)} kg
               </Text>
             </View>
+            <View className="items-center">
+              <Text className="text-gray-500 text-xs">Height</Text>
+              <Text className="text-gray-900 font-semibold">
+                {(pokemon.height / 10).toFixed(1)} m
+              </Text>
+            </View>
+          </View>
+
+          {/* TODO: Abilities section */}
+
+          {/* Base Stats */}
+          <Text className="font-bold text-lg">Base Stats</Text>
+
+          {pokemon.stats.map((s) => (
+            <PokemonDetailsStatus
+              key={s.stat.name}
+              label={STAT_LABELS[s.stat.name] ?? s.stat.name}
+              value={s.base_stat}
+              color={STAT_COLORS[s.stat.name] ?? "#888"}
+            />
           ))}
         </View>
-
-        {hasArtwork && (
-          <Image
-            source={{ uri: artwork, width: 200, height: 200 }}
-            resizeMode="contain"
-          />
-        )}
-      </View>
-
-      <View className="p-6 gap-4">
-        {/* About */}
-        <View className="flex-row justify-around">
-          <View className="items-center">
-            <Text className="text-gray-500 text-xs">Weight</Text>
-            <Text className="text-gray-900 font-semibold">
-              {(pokemon.weight / 10).toFixed(1)} kg
-            </Text>
-          </View>
-          <View className="items-center">
-            <Text className="text-gray-500 text-xs">Height</Text>
-            <Text className="text-gray-900 font-semibold">
-              {(pokemon.height / 10).toFixed(1)} m
-            </Text>
-          </View>
-        </View>
-
-        {/* TODO: Abilities section */}
-
-        {/* Base Stats */}
-        <Text className="font-bold text-lg">Base Stats</Text>
-
-        {pokemon.stats.map((s) => (
-          <PokemonDetailsStatus
-            key={s.stat.name}
-            label={STAT_LABELS[s.stat.name] ?? s.stat.name}
-            value={s.base_stat}
-            color={STAT_COLORS[s.stat.name] ?? "#888"}
-          />
-        ))}
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 }
 
