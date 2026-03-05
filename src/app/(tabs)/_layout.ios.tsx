@@ -9,7 +9,7 @@ export default function TabLayout() {
       </NativeTabs.Trigger>
       <NativeTabs.Trigger name="favorite">
         <Icon sf={{ default: "heart", selected: "heart.fill" }} />
-        <Label>Settings</Label>
+        <Label>Favorites</Label>
       </NativeTabs.Trigger>
     </NativeTabs>
   );
