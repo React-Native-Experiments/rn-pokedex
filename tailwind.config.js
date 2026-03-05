@@ -1,4 +1,5 @@
-const { colors } = require("./theme.config");
+const { COLORS } = require("./src/constants/theme");
+const { TYPE_COLORS } = require("./src/constants/pokemon");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -10,7 +11,10 @@ module.exports = {
   presets: [require("nativewind/preset")],
   theme: {
     extend: {
-      colors,
+      colors: {
+        primary: COLORS.primary,
+        pokemon: TYPE_COLORS,
+      },
     },
   },
   plugins: [],
