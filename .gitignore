@@ -44,3 +44,6 @@ app-example
 
 # Nativewind
 nativewind-env.d.ts
+
+# Claude
+.claude/
