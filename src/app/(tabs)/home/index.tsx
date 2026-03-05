@@ -3,8 +3,9 @@ import { StateError } from "@/components/ui/StateError";
 import { StateLoading } from "@/components/ui/StateLoading";
 import { extractPokemonId } from "@/utils/extractors";
 import { formatPokemonSpriteUrl } from "@/utils/formatters";
+import { Image as ExpoImage } from "expo-image";
 import { Link } from "expo-router";
-import { FlatList, Image, Text, View } from "react-native";
+import { FlatList, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Index() {
@@ -70,20 +71,18 @@ export function PokemonItem(props: PokemonItemProps) {
         params: { pokemon_id: id },
       }}
     >
-      <Image
+      <ExpoImage
         className="bg-purple-50 rounded-full"
-        source={{
-          uri: formatPokemonSpriteUrl(id),
-        }}
-        width={50}
-        height={50}
+        source={formatPokemonSpriteUrl(id)}
+        style={{ width: 50, height: 50 }}
+        transition={200}
       />
       <View className="flex-1 justify-center">
         <Text className="font-semibold text-lg capitalize flex-1 text-gray-900">
           {name}
         </Text>
-        <Text className="font-light text-sm capitalize flex-1 text-gray-700">
-          #{id}
+        <Text className="font-light text-sm flex-1 text-gray-700">
+          #{id.padStart(4, "0")}
         </Text>
       </View>
     </Link>
