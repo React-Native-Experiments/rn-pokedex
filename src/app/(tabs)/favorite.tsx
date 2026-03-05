@@ -1,9 +1,5 @@
-import { Text, View } from "react-native";
+import { StateEmpty } from "@/components/ui/StateEmpty";
 
 export default function Favorite() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text> Welcome to favorite.tsx</Text>
-    </View>
-  );
+  return <StateEmpty message="No favorites yet" />;
 }
