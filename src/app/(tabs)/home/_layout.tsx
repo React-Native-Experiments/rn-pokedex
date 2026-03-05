@@ -11,6 +11,7 @@ export default function Layout() {
       <Stack.Screen
         name="[pokemon_id]"
         options={{
+          title: "Details",
           headerBackButtonDisplayMode: "minimal",
         }}
       />
