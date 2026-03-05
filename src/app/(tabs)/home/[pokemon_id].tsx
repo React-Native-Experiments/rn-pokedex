@@ -103,7 +103,7 @@ export default function PokemonId() {
           ))}
 
           {/* abilities */}
-          <Text className="font-bold text-lg">Base Stats</Text>
+          <Text className="font-bold text-lg">Abilities</Text>
 
           <View className="flex flex-row gap-2">
             {pokemon.abilities.map((a) => (
