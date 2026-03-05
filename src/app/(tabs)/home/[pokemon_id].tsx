@@ -1,5 +1,7 @@
 import { usePokemon } from "@/api/pokemon/queries";
 import { Progress } from "@/components/ui/Progress";
+import { StateError } from "@/components/ui/StateError";
+import { StateLoading } from "@/components/ui/StateLoading";
 import { STAT_COLORS, STAT_LABELS, getTypeColor } from "@/constants/pokemon";
 import { useLocalSearchParams } from "expo-router";
 import { ColorValue, Image, ScrollView, Text, View } from "react-native";
@@ -7,14 +9,20 @@ import { ColorValue, Image, ScrollView, Text, View } from "react-native";
 export default function PokemonId() {
   const params = useLocalSearchParams<{ pokemon_id: string }>();
 
-  const { data: pokemon, isLoading, isError } = usePokemon(params.pokemon_id);
+  const {
+    data: pokemon,
+    isLoading,
+    isError,
+    refetch,
+  } = usePokemon(params.pokemon_id);
 
   const artwork = pokemon?.sprites.other?.["official-artwork"]?.front_default;
   const hasArtwork = !!artwork;
 
-  if (isLoading) return;
-  if (isError) return;
-  if (!pokemon) return;
+  if (isLoading) return <StateLoading />;
+  if (isError)
+    return <StateError message="Failed to load Pokemon" onRetry={refetch} />;
+  if (!pokemon) return null;
 
   const typeColor = getTypeColor(pokemon.types[0].type.name);
 
