@@ -1,4 +1,6 @@
 import { useInfinitePokemons } from "@/api/pokemon/queries";
+import { StateError } from "@/components/ui/StateError";
+import { StateLoading } from "@/components/ui/StateLoading";
 import { extractPokemonId } from "@/utils/extractors";
 import { formatPokemonSpriteUrl } from "@/utils/formatters";
 import { Link } from "expo-router";
@@ -11,13 +13,15 @@ export default function Index() {
     isLoading: isPokemonLoading,
     isError: isPokemonError,
     fetchNextPage,
+    refetch,
   } = useInfinitePokemons();
 
   const insets = useSafeAreaInsets();
 
-  if (isPokemonLoading) return;
-  if (isPokemonError) return;
-  if (!infinitePokemons) return;
+  if (isPokemonLoading) return <StateLoading />;
+  if (isPokemonError)
+    return <StateError message="Failed to load Pokemon" onRetry={refetch} />;
+  if (!infinitePokemons) return null;
 
   return (
     <View
