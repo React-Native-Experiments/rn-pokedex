@@ -49,8 +49,27 @@ export default function PokemonId() {
         )}
       </View>
 
-      <View className="p-6">
-        <Text className="font-bold text-lg mb-3">Base Stats</Text>
+      <View className="p-6 gap-4">
+        {/* About */}
+        <View className="flex-row justify-around">
+          <View className="items-center">
+            <Text className="text-gray-500 text-xs">Weight</Text>
+            <Text className="text-gray-900 font-semibold">
+              {(pokemon.weight / 10).toFixed(1)} kg
+            </Text>
+          </View>
+          <View className="items-center">
+            <Text className="text-gray-500 text-xs">Height</Text>
+            <Text className="text-gray-900 font-semibold">
+              {(pokemon.height / 10).toFixed(1)} m
+            </Text>
+          </View>
+        </View>
+
+        {/* TODO: Abilities section */}
+
+        {/* Base Stats */}
+        <Text className="font-bold text-lg">Base Stats</Text>
 
         {pokemon.stats.map((s) => (
           <PokemonDetailsStatus
