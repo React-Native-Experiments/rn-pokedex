@@ -22,6 +22,8 @@ export function PokemonList(props: PokemonListProps) {
       onEndReached={onEndReached}
       onEndReachedThreshold={0.5}
       showsVerticalScrollIndicator={false}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="never"
     />
   );
 }
