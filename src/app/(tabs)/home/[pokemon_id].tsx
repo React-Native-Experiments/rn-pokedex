@@ -5,6 +5,7 @@ import { StateLoading } from "@/components/ui/StateLoading";
 import { STAT_COLORS, STAT_LABELS, getTypeColor } from "@/constants/pokemon";
 import { isMobile } from "@/lib/platform";
 import { cn } from "@/utils/css";
+import { capitalize } from "@/utils/string";
 import { Image as ExpoImage } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
 import { ColorValue, ScrollView, Text, View } from "react-native";
@@ -39,8 +40,9 @@ export default function PokemonId() {
         className="flex-1"
         contentContainerStyle={{ minHeight: "100%", backgroundColor: "white" }}
       >
+        {/* pokemon hero */}
         <View
-          className="pt-14 pb-20 items-center justify-center rounded-b-[40] gap-3 bg-white"
+          className="pt-14 items-center justify-center rounded-b-[40] gap-3 bg-white "
           style={{ backgroundColor: typeColor }}
         >
           <Text className="capitalize text-white text-3xl font-bold">
@@ -72,7 +74,7 @@ export default function PokemonId() {
           )}
         </View>
 
-        <View className="p-6 gap-4">
+        <View className="p-6 pb-36 gap-4">
           <View className="flex-row justify-around">
             <View className="items-center">
               <Text className="text-gray-500 text-xs">Weight</Text>
@@ -88,6 +90,7 @@ export default function PokemonId() {
             </View>
           </View>
 
+          {/* status  */}
           <Text className="font-bold text-lg">Base Stats</Text>
 
           {pokemon.stats.map((s) => (
@@ -98,6 +101,23 @@ export default function PokemonId() {
               color={STAT_COLORS[s.stat.name] ?? "#888"}
             />
           ))}
+
+          {/* abilities */}
+          <Text className="font-bold text-lg">Base Stats</Text>
+
+          <View className="flex flex-row gap-2">
+            {pokemon.abilities.map((a) => (
+              <View
+                key={a.ability.name}
+                className="px-4 py-2 bg-gray-100 rounded-full flex flex-row gap-1"
+              >
+                <Text>{capitalize(a.ability.name)}</Text>
+                {a.is_hidden && (
+                  <Text className="text-gray-500 italic">(Hidden)</Text>
+                )}
+              </View>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>
