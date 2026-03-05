@@ -11,8 +11,8 @@ interface PokemonHeroProps {
 export function PokemonHero(props: PokemonHeroProps) {
   const { name, types, artwork, backgroundColor } = props;
 
-  const renderPokemonType = (type: string, idx: number) => (
-    <View className="bg-white/30 rounded-full px-3 py-1" key={idx}>
+  const renderPokemonType = (type: string) => (
+    <View className="bg-white/30 rounded-full px-3 py-1" key={type}>
       <Text className={"uppercase text-xs text-white font-black"}>{type}</Text>
     </View>
   );
@@ -25,7 +25,7 @@ export function PokemonHero(props: PokemonHeroProps) {
       <Text className="capitalize text-white text-3xl font-bold">{name}</Text>
 
       <View className="flex-row gap-2">
-        {types.map((t, idx) => renderPokemonType(t, idx))}
+        {types.map((t, idx) => renderPokemonType(t))}
       </View>
 
       {artwork && (
