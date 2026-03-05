@@ -1,10 +1,9 @@
 import { usePokemon } from "@/api/pokemon/queries";
 import { Progress } from "@/components/ui/Progress";
+import { STAT_COLORS, STAT_LABELS } from "@/constants/pokemon";
 import { useLocalSearchParams } from "expo-router";
 import { ColorValue, Image, ScrollView, Text, View } from "react-native";
 
-// working in progress
-// TODO: finish this fuck
 export default function PokemonId() {
   const params = useLocalSearchParams<{ pokemon_id: string }>();
 
@@ -48,14 +47,14 @@ export default function PokemonId() {
       <View className="p-6">
         <Text className="font-bold text-lg mb-3">Base Stats</Text>
 
-        {/* TODO: consume the api  */}
-        <PokemonDetailsStatus label="HP" value={45} color="#FF0" />
-
-        <View className="flex-row items-center">
-          <Text className="text-gray-600/80 w-16">HP</Text>
-          <Text className="text-gray-900 font-[500] mr-2">45</Text>
-          <Progress color="#FF0000" progress={45} />
-        </View>
+        {pokemon.stats.map((s) => (
+          <PokemonDetailsStatus
+            key={s.stat.name}
+            label={STAT_LABELS[s.stat.name] ?? s.stat.name}
+            value={s.base_stat}
+            color={STAT_COLORS[s.stat.name] ?? "#888"}
+          />
+        ))}
       </View>
     </ScrollView>
   );
