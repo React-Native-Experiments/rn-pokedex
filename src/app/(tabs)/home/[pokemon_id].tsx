@@ -3,8 +3,9 @@ import { Progress } from "@/components/ui/Progress";
 import { StateError } from "@/components/ui/StateError";
 import { StateLoading } from "@/components/ui/StateLoading";
 import { STAT_COLORS, STAT_LABELS, getTypeColor } from "@/constants/pokemon";
+import { Image as ExpoImage } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
-import { ColorValue, Image, ScrollView, Text, View } from "react-native";
+import { ColorValue, ScrollView, Text, View } from "react-native";
 
 export default function PokemonId() {
   const params = useLocalSearchParams<{ pokemon_id: string }>();
@@ -55,9 +56,11 @@ export default function PokemonId() {
           </View>
 
           {hasArtwork && (
-            <Image
-              source={{ uri: artwork, width: 200, height: 200 }}
-              resizeMode="contain"
+            <ExpoImage
+              source={artwork}
+              style={{ width: 200, height: 200 }}
+              contentFit="contain"
+              transition={200}
             />
           )}
         </View>
