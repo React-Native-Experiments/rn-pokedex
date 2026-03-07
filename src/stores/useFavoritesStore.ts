@@ -16,7 +16,7 @@ export const useFavoritesStore = createPersistedStore<FavoritesState>(
       const favorites = get().favorites;
 
       if (favorites.includes(id)) {
-        set({ favorites: favorites.filter((fav) => fav !== id) });
+        return set({ favorites: favorites.filter((fav) => fav !== id) });
       }
 
       set({ favorites: [...favorites, id] });
