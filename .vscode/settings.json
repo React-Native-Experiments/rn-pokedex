@@ -3,5 +3,12 @@
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit",
     "source.sortMembers": "explicit"
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "metro.config.js": "*.config.js, *.config.ts",
+    "package.json": "*.lock, .prettier*, .eslint*",
+    "README.md": "*.md",
+    "expo-env.d.ts": "*.d.ts"
   }
 }
