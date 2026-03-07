@@ -2,13 +2,10 @@
 
 A cross-platform Pokedex app built with React Native and Expo as a hands-on crash course into modern mobile development.
 
-<!-- TODO: Add hero screenshot -->
-![App Screenshot](./screenshots/hero.png)
-
 ## Screenshots
 
-| Home | Search | Details | Favorites |
-| :---: | :---: | :---: | :---: |
+|              Home               |               Search                |                Details                |                 Favorites                 |
+| :-----------------------------: | :---------------------------------: | :-----------------------------------: | :---------------------------------------: |
 | ![Home](./screenshots/home.png) | ![Search](./screenshots/search.png) | ![Details](./screenshots/details.png) | ![Favorites](./screenshots/favorites.png) |
 
 ## Features
@@ -22,18 +19,18 @@ A cross-platform Pokedex app built with React Native and Expo as a hands-on cras
 
 ## Tech Stack
 
-| Library | Purpose |
-| :--- | :--- |
-| [Expo](https://expo.dev) (SDK 54) | Runtime, tooling, and dev client |
-| [Expo Router](https://docs.expo.dev/router/introduction/) | File-based routing and navigation |
-| [TanStack Query](https://tanstack.com/query) | Server state, caching, and infinite queries |
-| [Zustand](https://zustand.docs.pmnd.rs/) | Client state management |
-| [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv) | Persistent key-value storage (Zustand middleware) |
-| [NativeWind](https://www.nativewind.dev/) | Tailwind CSS styling for React Native |
-| [FlashList](https://shopify.github.io/flash-list/) | High-performance list rendering |
-| [expo-image](https://docs.expo.dev/versions/latest/sdk/image/) | Optimized image loading and caching |
-| [usehooks-ts](https://usehooks-ts.com/) | Utility hooks (debouncing) |
-| [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) | Animations |
+| Library                                                                        | Purpose                                           |
+| :----------------------------------------------------------------------------- | :------------------------------------------------ |
+| [Expo](https://expo.dev) (SDK 54)                                              | Runtime, tooling, and dev client                  |
+| [Expo Router](https://docs.expo.dev/router/introduction/)                      | File-based routing and navigation                 |
+| [TanStack Query](https://tanstack.com/query)                                   | Server state, caching, and infinite queries       |
+| [Zustand](https://zustand.docs.pmnd.rs/)                                       | Client state management                           |
+| [react-native-mmkv](https://github.com/mrousavy/react-native-mmkv)             | Persistent key-value storage (Zustand middleware) |
+| [NativeWind](https://www.nativewind.dev/)                                      | Tailwind CSS styling for React Native             |
+| [FlashList](https://shopify.github.io/flash-list/)                             | High-performance list rendering                   |
+| [expo-image](https://docs.expo.dev/versions/latest/sdk/image/)                 | Optimized image loading and caching               |
+| [usehooks-ts](https://usehooks-ts.com/)                                        | Utility hooks (debouncing)                        |
+| [React Native Reanimated](https://docs.swmansion.com/react-native-reanimated/) | Animations                                        |
 
 ## Getting Started
 
