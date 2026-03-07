@@ -1,14 +1,4 @@
-import { createMMKV } from "react-native-mmkv";
-import { create } from "zustand";
-import { createJSONStorage, persist, StateStorage } from "zustand/middleware";
-
-const mmkv = createMMKV({ id: "favorites-storage" });
-
-const mmkvStorage: StateStorage = {
-  getItem: (key) => mmkv.getString(key) ?? null,
-  setItem: (key, value) => mmkv.set(key, value),
-  removeItem: (key) => mmkv.remove(key),
-};
+import { createPersistedStore } from "@/lib/persist";
 
 interface FavoritesState {
   favorites: string[];
@@ -16,21 +6,20 @@ interface FavoritesState {
   isFavorite: (id: string) => boolean;
 }
 
-export const useFavoritesStore = create<FavoritesState>()(
-  persist(
-    (set, get) => ({
-      favorites: [],
-      toggleFavorite: (id) =>
-        set((state) => ({
-          favorites: state.favorites.includes(id)
-            ? state.favorites.filter((fav) => fav !== id)
-            : [...state.favorites, id],
-        })),
-      isFavorite: (id) => get().favorites.includes(id),
-    }),
-    {
-      name: "pokemon-favorites",
-      storage: createJSONStorage(() => mmkvStorage),
+export const useFavoritesStore = createPersistedStore<FavoritesState>(
+  "pokemon-favorites",
+  (set, get) => ({
+    favorites: [],
+    isFavorite: (id: string) => get().favorites.includes(id),
+
+    toggleFavorite: (id: string) => {
+      const favorites = get().favorites;
+
+      if (favorites.includes(id)) {
+        set({ favorites: favorites.filter((fav) => fav !== id) });
+      }
+
+      set({ favorites: [...favorites, id] });
     },
-  ),
+  }),
 );
