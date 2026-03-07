@@ -47,7 +47,11 @@ export default function Index() {
       <PokemonList
         data={filtered}
         renderItem={({ item }) => (
-          <PokemonItem id={extractPokemonId(item.url)} name={item.name} />
+          <PokemonItem
+            key={extractPokemonId(item.url)}
+            name={item.name}
+            id={extractPokemonId(item.url)}
+          />
         )}
         onEndReached={() => fetchNextPage()}
       />

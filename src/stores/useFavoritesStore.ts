@@ -1,8 +1,13 @@
 import { createPersistedStore } from "@/lib/persist";
 
+export interface Favorite {
+  id: string;
+  name: string;
+}
+
 interface FavoritesState {
-  favorites: string[];
-  toggleFavorite: (id: string) => void;
+  favorites: Favorite[];
+  toggleFavorite: (favorite: Favorite) => void;
   isFavorite: (id: string) => boolean;
 }
 
@@ -10,16 +15,16 @@ export const useFavoritesStore = createPersistedStore<FavoritesState>(
   "pokemon-favorites",
   (set, get) => ({
     favorites: [],
-    isFavorite: (id: string) => get().favorites.includes(id),
+    isFavorite: (id: string) => get().favorites.some((fav) => fav.id === id),
 
-    toggleFavorite: (id: string) => {
+    toggleFavorite: (favorite: Favorite) => {
       const favorites = get().favorites;
 
-      if (favorites.includes(id)) {
-        return set({ favorites: favorites.filter((fav) => fav !== id) });
+      if (favorites.some((fav) => fav.id === favorite.id)) {
+        return set({ favorites: favorites.filter((fav) => fav.id !== favorite.id) });
       }
 
-      set({ favorites: [...favorites, id] });
+      set({ favorites: [...favorites, favorite] });
     },
   }),
 );

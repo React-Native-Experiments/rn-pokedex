@@ -11,9 +11,8 @@ interface PokemonItemProps {
 }
 
 export function PokemonItem(props: PokemonItemProps) {
-  const { isFavorite, toggleFavorite } = useFavoritesStore();
-
   const { name, id } = props;
+  const { isFavorite, toggleFavorite } = useFavoritesStore();
 
   return (
     <Link
@@ -41,7 +40,7 @@ export function PokemonItem(props: PokemonItemProps) {
 
         <Pressable
           className="items-center justify-center aspect-square"
-          onPress={() => toggleFavorite(id)}
+          onPress={() => toggleFavorite({ id, name })}
         >
           <Ionicons
             name={isFavorite(id) ? "heart" : "heart-outline"}
