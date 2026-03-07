@@ -8,7 +8,7 @@ export default function RootLayout() {
     <QueryClientProvider client={client}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="modal" options={{ presentation: "modal", contentStyle: { backgroundColor: "white" } }} />
+        <Stack.Screen name="details" options={{ presentation: "modal" }} />
       </Stack>
     </QueryClientProvider>
   );
