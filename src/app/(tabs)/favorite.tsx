@@ -31,7 +31,8 @@ export default function Favorite() {
         renderItem={({ item }) => (
           <PokemonItem key={item.id} id={item.id} name={item.name} />
         )}
-        contentContainerStyle={{ gap: 8, paddingBottom: 70 }}
+        ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+        contentContainerStyle={{ paddingBottom: 70 }}
         showsVerticalScrollIndicator={false}
       />
     </View>

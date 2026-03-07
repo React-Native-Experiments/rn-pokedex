@@ -1,5 +1,6 @@
 import { GenericResource } from "@/types/resource";
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
+import { View } from "react-native";
 
 interface PokemonListProps {
   data: GenericResource[];
@@ -15,7 +16,8 @@ export function PokemonList(props: PokemonListProps) {
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.url}
-      contentContainerStyle={{ gap: 8, paddingBottom: 70 }}
+      ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
+      contentContainerStyle={{ paddingBottom: 70 }}
       onEndReached={onEndReached}
       onEndReachedThreshold={0.5}
       showsVerticalScrollIndicator={false}
