@@ -2,11 +2,16 @@
 
 A cross-platform Pokedex app built with React Native and Expo as a hands-on crash course into modern mobile development.
 
+> **AI Disclaimer:** All code in this project was written by hand. AI tools were used strictly for brainstorming ideas, refactoring existing code, and generating documentation — never for writing features, debugging errors, or bypassing the learning process. Every bug was diagnosed manually through testing and reading the docs. The goal was to learn, and that required doing the work myself.
+
 ## Screenshots
 
-|              Home               |               Search                |                Details                |                 Favorites                 |
-| :-----------------------------: | :---------------------------------: | :-----------------------------------: | :---------------------------------------: |
-| ![Home](./screenshots/home.png) | ![Search](./screenshots/search.png) | ![Details](./screenshots/details.png) | ![Favorites](./screenshots/favorites.png) |
+<p align="center">
+  <img src="./screenshots/home.png" width="24%" />
+  <img src="./screenshots/search.png" width="24%" />
+  <img src="./screenshots/details.png" width="24%" />
+  <img src="./screenshots/favorites.png" width="24%" />
+</p>
 
 ## Features
 
@@ -37,7 +42,7 @@ A cross-platform Pokedex app built with React Native and Expo as a hands-on cras
 ### Prerequisites
 
 - Node.js 18+
-- Yarn
+- Bun
 - [Expo CLI](https://docs.expo.dev/get-started/installation/)
 - iOS Simulator (macOS) or Android Emulator
 
@@ -45,30 +50,20 @@ A cross-platform Pokedex app built with React Native and Expo as a hands-on cras
 
 ```bash
 # Clone the repository
-git clone <repo-url>
-cd crash-course-2026
+git clone <repo-url>/rn-pokedex.git
+cd rn-pokedex
 
 # Install dependencies
-yarn install
+bun install
 
 # Prebuild native projects (required for dev client libraries like MMKV)
 npx expo prebuild
 
-# Start the dev server
-yarn start
-```
+# Run on iOS
+bun run ios
 
-### Running
-
-```bash
-# iOS
-yarn ios
-
-# Android
-yarn android
-
-# Web
-yarn web
+# Run on Android
+bun run android
 ```
 
 ## Architecture
@@ -93,4 +88,4 @@ All Pokemon data is fetched from [PokeAPI](https://pokeapi.co/).
 
 ## License
 
-This project is for educational purposes.
+This project is open source under the [MIT License](./LICENSE). Use it, learn from it, break it apart — that's what it's here for.
