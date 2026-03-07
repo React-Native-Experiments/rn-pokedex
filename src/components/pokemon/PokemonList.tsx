@@ -1,20 +1,17 @@
 import { GenericResource } from "@/types/resource";
-import { FlatList, ListRenderItem } from "react-native";
+import { FlashList, ListRenderItem } from "@shopify/flash-list";
 
 interface PokemonListProps {
   data: GenericResource[];
-
   renderItem: ListRenderItem<GenericResource>;
   onEndReached: () => void;
 }
 
-// TODO: replace with flashlist
 export function PokemonList(props: PokemonListProps) {
   const { data, renderItem, onEndReached } = props;
 
   return (
-    <FlatList
-      className="flex-1"
+    <FlashList
       data={data}
       renderItem={renderItem}
       keyExtractor={(item) => item.url}

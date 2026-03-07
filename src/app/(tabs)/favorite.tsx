@@ -1,7 +1,8 @@
 import { PokemonItem } from "@/components/pokemon/PokemonItem";
 import { StateEmpty } from "@/components/ui/StateEmpty";
 import { useFavoritesStore } from "@/stores/useFavoritesStore";
-import { FlatList, Text, View } from "react-native";
+import { FlashList } from "@shopify/flash-list";
+import { Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Favorite() {
@@ -24,8 +25,7 @@ export default function Favorite() {
         <Text className="text-sm text-gray-500">Your personal collection</Text>
       </View>
 
-      <FlatList
-        className="flex-1"
+      <FlashList
         data={favorites}
         keyExtractor={(fav) => fav.id}
         renderItem={({ item }) => (
