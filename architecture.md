@@ -10,10 +10,12 @@ The Pokedex application is a mobile-first project built with React Native and Ex
 | React Native | 0.81.5 | Mobile Framework |
 | Expo | 54.0.33 | Runtime & Tooling |
 | Expo Router | 6.0.23 | File-based Routing |
-| TanStack Query | 5.90.21 | State Management & Data Fetching |
+| TanStack Query | 5.90.21 | Server State & Data Fetching |
+| Zustand | 5.0.11 | Client State Management (Favorites) |
 | NativeWind | 4.2.2 | Tailwind CSS for React Native |
 | TypeScript | 5.9.2 | Type Safety |
-| MMKV | 4.2.0 | Fast, persistent key-value storage |
+| MMKV | 4.2.0 | High-performance, persistent key-value storage |
+| Expo Image | 3.0.11 | Optimized image loading and caching |
 | usehooks-ts | 3.1.1 | React Hook utilities (e.g., debouncing) |
 
 ## 3. Project Structure
@@ -28,7 +30,7 @@ src/
 │   │   │   └── index.tsx      # Main Pokedex listing screen with search
 │   │   ├── _layout.ios.tsx    # Platform-specific (iOS) tab configuration
 │   │   ├── _layout.tsx        # Default tab bar layout
-│   │   └── favorite.tsx       # Favorites screen (empty state)
+│   │   └── favorite.tsx       # Favorites screen displaying saved Pokemon
 │   ├── _layout.tsx            # Global app layout with QueryClientProvider
 │   └── index.tsx              # Root entry point with redirect to home
 ├── assets/ global.css         # Tailwind CSS entry point
@@ -37,7 +39,7 @@ src/
 │   │   ├── PokemonAbilities.tsx # Displays ability list and hidden status
 │   │   ├── PokemonAbout.tsx     # Displays height and weight
 │   │   ├── PokemonHero.tsx      # Top section with name, types, and artwork
-│   │   ├── PokemonItem.tsx      # List item for the Pokedex index
+│   │   ├── PokemonItem.tsx      # List item with favorite toggle
 │   │   ├── PokemonList.tsx      # Optimized FlatList wrapper for Pokemon
 │   │   └── PokemonStats.tsx     # Animated progress bars for battle stats
 │   └── ui/                    # Generic shared UI components
@@ -49,9 +51,12 @@ src/
 │   ├── pokemon.ts             # Type color mappings and stat labels
 │   └── theme.ts               # Custom color palette definitions
 ├── hooks/
-│   ├── useFavoritesMK.ts      # Placeholder for MMKV-based persistent favorites
 │   └── usePokemonSearch.ts    # Logic for debounced name-based filtering
-├── lib/ http.ts               # Simplified Fetch-based HTTP client wrapper
+├── lib/
+│   ├── http.ts                # Simplified Fetch-based HTTP client wrapper
+│   └── persist.ts             # Zustand + MMKV persistence configuration
+├── stores/
+│   └── useFavoritesStore.ts   # Zustand store for managing favorite Pokemon
 ├── types/                     # Centralized TypeScript definitions for API responses
 │   ├── pokemon.ts             # Pokemon and list interfaces
 │   └── resource.ts            # Common API resource types
@@ -78,7 +83,7 @@ Data flows from the PokeAPI through a standardized pipeline:
     - `useInfinitePokemons`: Manages paginated list state and fetches more results on scroll.
     - `usePokemon`: Retrieves specific entity details based on the dynamic route parameter.
 - **Search & Filtering (`src/hooks/usePokemonSearch.ts`)**: Implements client-side filtering on the fetched pages using a debounced search term (300ms) to ensure smooth performance.
-- **Persistence**: Includes `react-native-mmkv` for high-performance data persistence, primarily intended for storing user favorites.
+- **Persistence**: Uses `Zustand` with a custom `MMKV` storage adapter (`src/lib/persist.ts`) for high-performance data persistence of user favorites.
 
 ## 6. Styling
 - **NativeWind**: Utilizes Tailwind CSS utility classes within the `className` prop for consistent styling across platforms.
@@ -87,12 +92,13 @@ Data flows from the PokeAPI through a standardized pipeline:
 - **Utilities (`src/utils/css.ts`)**: Includes a `cn` helper that combines `clsx` and `tailwind-merge` to handle conditional styles and resolve Tailwind conflicts.
 
 ## 7. Conventions & Patterns
-- **Separation of Concerns**: UI components (Hero, Stats, About) are separated from data-fetching logic (Query Hooks) and filtering logic (Search Hooks).
+- **Separation of Concerns**: UI components are separated from data-fetching logic (Query Hooks) and global state (Zustand Stores).
+- **Persistent State**: Global state requiring persistence (like favorites) is abstracted into stores with middleware handling the sync to MMKV.
 - **State Feedback**: Systematic use of `StateLoading`, `StateError`, and `StateEmpty` across all screens to provide consistent user feedback.
 - **Path Aliasing**: Uses the `@/` prefix (configured in `tsconfig.json`) to reference the `src/` directory.
 - **Debouncing Pattern**: Uses `useDebounceValue` from `usehooks-ts` for search inputs to minimize unnecessary re-renders and filtering logic.
 
 ## 8. Current Gaps
-- **Persistence Logic (`src/hooks/useFavoritesMK.ts`)**: The hook for managing favorites via MMKV is currently a placeholder (0 bytes) and needs full implementation.
-- **Favorites Integration (`src/app/(tabs)/favorite.tsx`)**: The Favorites screen correctly shows an empty state but lacks the logic to display and manage a list of saved Pokemon.
-- **Detail View Polish**: Additional Pokemon data such as "About" text (flavor text) or evolutionary chains could be added to complete the detail experience.
+- **Detail View Polish**: Additional Pokemon data such as "About" text (flavor text) or evolutionary chains are currently missing from the detail experience.
+- **Unit Testing**: Lack of testing coverage for utility functions and custom hooks.
+- **Haptic Feedback**: Although `expo-haptics` is installed, it is not yet utilized in the favorite toggle or navigation transitions.
