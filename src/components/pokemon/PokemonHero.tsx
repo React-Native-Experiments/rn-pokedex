@@ -18,10 +18,10 @@ export function PokemonHero(props: PokemonHeroProps) {
   );
 
   return (
-    <View className="items-center justify-center gap-3 rounded-b-[40] bg-white pt-14" style={{ backgroundColor }}>
+    <View className="items-center justify-center gap-3 rounded-b-[40] bg-white pb-8 pt-14" style={{ backgroundColor }}>
       <Text className="text-3xl font-bold capitalize text-white">{name}</Text>
 
-      <View className="flex-row gap-2">{types.map((t, idx) => renderPokemonType(t))}</View>
+      <View className="flex-row gap-2">{types.map((t) => renderPokemonType(t))}</View>
 
       {artwork && (
         <ExpoImage source={artwork} style={{ width: 200, height: 200 }} contentFit="contain" transition={200} />
