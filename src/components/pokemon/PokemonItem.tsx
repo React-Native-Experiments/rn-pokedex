@@ -17,7 +17,8 @@ export function PokemonItem(props: PokemonItemProps) {
   return (
     <Link
       href={{
-        pathname: "/(tabs)/home/[pokemon_id]",
+        pathname: "/modal",
+        // pathname: "/(tabs)/home/[pokemon_id]",
         params: { pokemon_id: id },
       }}
       asChild

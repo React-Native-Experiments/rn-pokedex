@@ -6,7 +6,10 @@ const client = new QueryClient();
 export default function RootLayout() {
   return (
     <QueryClientProvider client={client}>
-      <Stack screenOptions={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="modal" options={{ presentation: "modal", contentStyle: { backgroundColor: "white" } }} />
+      </Stack>
     </QueryClientProvider>
   );
 }
