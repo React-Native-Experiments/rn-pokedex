@@ -15,9 +15,15 @@ export default function Favorite() {
   return (
     <View
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-      className="px-6 flex-1"
+      className="px-6 flex-1 gap-6"
     >
-      <Text className="text-3xl mt-10 mb-4">Favorites</Text>
+      <View className="mt-10 gap-1">
+        <Text className="text-4xl font-bold tracking-tight text-gray-900">
+          Favorites
+        </Text>
+        <Text className="text-sm text-gray-500">Your personal collection</Text>
+      </View>
+
       <FlatList
         className="flex-1"
         data={favorites}

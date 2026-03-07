@@ -33,8 +33,15 @@ export default function Index() {
       style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
       className="px-6 flex-1"
     >
-      <View className="gap-2 mb-4">
-        <Text className="text-3xl mt-10 ">Pokemons</Text>
+      <View className="gap-4 mb-6">
+        <View className="mt-10 gap-1">
+          <Text className="text-4xl font-bold tracking-tight text-gray-900">
+            Pokemons
+          </Text>
+          <Text className="text-sm text-gray-500">
+            Currently loaded {filtered.length} species
+          </Text>
+        </View>
 
         <TextInput
           value={search}
