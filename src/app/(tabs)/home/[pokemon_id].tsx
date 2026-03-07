@@ -12,16 +12,10 @@ import { ScrollView, View } from "react-native";
 export default function PokemonId() {
   const params = useLocalSearchParams<{ pokemon_id: string }>();
 
-  const {
-    data: pokemon,
-    isLoading,
-    isError,
-    refetch,
-  } = usePokemon(params.pokemon_id);
+  const { data: pokemon, isLoading, isError, refetch } = usePokemon(params.pokemon_id);
 
   if (isLoading) return <StateLoading />;
-  if (isError)
-    return <StateError message="Failed to load Pokemon" onRetry={refetch} />;
+  if (isError) return <StateError message="Failed to load Pokemon" onRetry={refetch} />;
   if (!pokemon) return null;
 
   const typeColor = getTypeColor(pokemon.types[0].type.name);
@@ -29,14 +23,8 @@ export default function PokemonId() {
 
   return (
     <View className="flex-1">
-      <View
-        className="absolute top-0 left-0 right-0 h-1/2"
-        style={{ backgroundColor: typeColor }}
-      />
-      <ScrollView
-        className="flex-1"
-        contentContainerStyle={{ minHeight: "100%", backgroundColor: "white" }}
-      >
+      <View className="absolute left-0 right-0 top-0 h-1/2" style={{ backgroundColor: typeColor }} />
+      <ScrollView className="flex-1" contentContainerStyle={{ minHeight: "100%", backgroundColor: "white" }}>
         <PokemonHero
           name={pokemon.name}
           types={pokemon.types.map((t) => t.type.name)}
@@ -44,7 +32,7 @@ export default function PokemonId() {
           backgroundColor={typeColor}
         />
 
-        <View className="p-6 pb-36 gap-4">
+        <View className="gap-4 p-6 pb-36">
           <PokemonAbout weight={pokemon.weight} height={pokemon.height} />
           <PokemonStats stats={pokemon.stats} />
           <PokemonAbilities

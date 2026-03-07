@@ -9,11 +9,7 @@ export function usePokemonSearch(data: PokemonPage[]) {
   const pages = data.flatMap((p) => p.results);
 
   const filtered = useMemo(
-    () =>
-      pages.filter(
-        (p) =>
-          !debouncedSearch || p.name.includes(debouncedSearch.toLowerCase()),
-      ),
+    () => pages.filter((p) => !debouncedSearch || p.name.includes(debouncedSearch.toLowerCase())),
     [pages, debouncedSearch],
   );
 

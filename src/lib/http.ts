@@ -1,14 +1,9 @@
 class Http {
-  async get<T = unknown>(
-    url: string,
-    params?: Record<string, string | number | boolean>,
-  ) {
+  async get<T = unknown>(url: string, params?: Record<string, string | number | boolean>) {
     const urlObj = new URL(url);
 
     if (params) {
-      const paramsStr = Object.fromEntries(
-        Object.entries(params).map(([k, v]) => [k, v.toString()]),
-      );
+      const paramsStr = Object.fromEntries(Object.entries(params).map(([k, v]) => [k, v.toString()]));
 
       urlObj.search = new URLSearchParams(paramsStr).toString();
     }

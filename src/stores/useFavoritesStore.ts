@@ -11,20 +11,17 @@ interface FavoritesState {
   isFavorite: (id: string) => boolean;
 }
 
-export const useFavoritesStore = createPersistedStore<FavoritesState>(
-  "pokemon-favorites",
-  (set, get) => ({
-    favorites: [],
-    isFavorite: (id: string) => get().favorites.some((fav) => fav.id === id),
+export const useFavoritesStore = createPersistedStore<FavoritesState>("pokemon-favorites", (set, get) => ({
+  favorites: [],
+  isFavorite: (id: string) => get().favorites.some((fav) => fav.id === id),
 
-    toggleFavorite: (favorite: Favorite) => {
-      const favorites = get().favorites;
+  toggleFavorite: (favorite: Favorite) => {
+    const favorites = get().favorites;
 
-      if (favorites.some((fav) => fav.id === favorite.id)) {
-        return set({ favorites: favorites.filter((fav) => fav.id !== favorite.id) });
-      }
+    if (favorites.some((fav) => fav.id === favorite.id)) {
+      return set({ favorites: favorites.filter((fav) => fav.id !== favorite.id) });
+    }
 
-      set({ favorites: [...favorites, favorite] });
-    },
-  }),
-);
+    set({ favorites: [...favorites, favorite] });
+  },
+}));

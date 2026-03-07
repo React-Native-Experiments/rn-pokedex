@@ -22,24 +22,20 @@ export function PokemonItem(props: PokemonItemProps) {
       }}
       asChild
     >
-      <Pressable className="border border-gray-300/70 rounded-lg p-4 flex flex-row item-center gap-x-2 active:bg-gray-50 ">
+      <Pressable className="item-center flex flex-row gap-x-2 rounded-lg border border-gray-300/70 p-4 active:bg-gray-50">
         <ExpoImage
-          className="bg-purple-50 rounded-full"
+          className="rounded-full bg-purple-50"
           source={formatPokemonSpriteUrl(id)}
           style={{ width: 50, height: 50 }}
           transition={200}
         />
         <View className="flex-1 justify-center">
-          <Text className="font-semibold text-lg capitalize flex-1 text-gray-900">
-            {name}
-          </Text>
-          <Text className="font-light text-sm flex-1 text-gray-700">
-            #{id.padStart(4, "0")}
-          </Text>
+          <Text className="flex-1 text-lg font-semibold capitalize text-gray-900">{name}</Text>
+          <Text className="flex-1 text-sm font-light text-gray-700">#{id.padStart(4, "0")}</Text>
         </View>
 
         <Pressable
-          className="items-center justify-center aspect-square rounded-full active:bg-rose-50/40"
+          className="aspect-square items-center justify-center rounded-full active:bg-rose-50/40"
           onPress={(e) => {
             e.stopPropagation();
             toggleFavorite({ id, name });

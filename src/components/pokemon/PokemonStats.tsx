@@ -12,23 +12,17 @@ interface PokemonStatsProps {
 export function PokemonStats({ stats }: PokemonStatsProps) {
   const renderPokemonStat = (text: string, value: number, tint: ColorValue) => (
     <View key={text} className="flex-row items-center">
-      <Text className="text-gray-600/80 w-16">{text}</Text>
-      <Text className="text-gray-900 font-[500] mr-2">{value}</Text>
+      <Text className="w-16 text-gray-600/80">{text}</Text>
+      <Text className="mr-2 font-[500] text-gray-900">{value}</Text>
       <Progress color={tint} progress={value} />
     </View>
   );
 
   return (
     <View className="gap-4">
-      <Text className="font-bold text-lg">Base Stats</Text>
+      <Text className="text-lg font-bold">Base Stats</Text>
 
-      {stats.map((s) =>
-        renderPokemonStat(
-          s.stat.name,
-          s.base_stat,
-          STAT_COLORS[s.stat.name] ?? "#888",
-        ),
-      )}
+      {stats.map((s) => renderPokemonStat(s.stat.name, s.base_stat, STAT_COLORS[s.stat.name] ?? "#888"))}
     </View>
   );
 }

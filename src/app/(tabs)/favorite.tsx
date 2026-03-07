@@ -14,22 +14,15 @@ export default function Favorite() {
   }
 
   return (
-    <View
-      style={{ paddingTop: insets.top, paddingBottom: insets.bottom }}
-      className="px-6 flex-1 gap-6"
-    >
+    <View style={{ paddingTop: insets.top, paddingBottom: insets.bottom }} className="flex-1 gap-6 px-6">
       <View className="mt-10 gap-1">
-        <Text className="text-4xl font-bold tracking-tight text-gray-900">
-          Favorites
-        </Text>
+        <Text className="text-4xl font-bold tracking-tight text-gray-900">Favorites</Text>
         <Text className="text-sm text-gray-500">Your personal collection</Text>
       </View>
 
       <PokemonList
         data={favorites}
-        renderItem={({ item }) => (
-          <PokemonItem key={item.id} id={item.id} name={item.name} />
-        )}
+        renderItem={({ item }) => <PokemonItem key={item.id} id={item.id} name={item.name} />}
       />
     </View>
   );

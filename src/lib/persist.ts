@@ -10,10 +10,7 @@ const mmkvStorage: StateStorage = {
   removeItem: (key) => mmkv.remove(key),
 };
 
-export function createPersistedStore<T>(
-  name: string,
-  initializer: StateCreator<T, [["zustand/persist", unknown]]>,
-) {
+export function createPersistedStore<T>(name: string, initializer: StateCreator<T, [["zustand/persist", unknown]]>) {
   return create<T>()(
     persist(initializer, {
       name,

@@ -14,18 +14,14 @@ export default function RootLayout() {
         name="home"
         options={{
           title: "Pokedex",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="apps-sharp" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="apps-sharp" size={size} color={color} />,
         }}
       />
       <Tabs.Screen
         name="favorite"
         options={{
           title: "Favorites",
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="heart" size={size} color={color} />
-          ),
+          tabBarIcon: ({ color, size }) => <Ionicons name="heart" size={size} color={color} />,
         }}
       />
     </Tabs>
