@@ -40,7 +40,10 @@ export function PokemonItem(props: PokemonItemProps) {
 
         <Pressable
           className="items-center justify-center aspect-square rounded-full active:bg-rose-50/40"
-          onPress={() => toggleFavorite({ id, name })}
+          onPress={(e) => {
+            e.stopPropagation();
+            toggleFavorite({ id, name });
+          }}
         >
           <Ionicons
             name={isFavorite(id) ? "heart" : "heart-outline"}
