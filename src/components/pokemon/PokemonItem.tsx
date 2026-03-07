@@ -22,7 +22,7 @@ export function PokemonItem(props: PokemonItemProps) {
       }}
       asChild
     >
-      <View className="border border-gray-300/70 rounded-lg p-4 flex flex-row item-center gap-x-2 active:bg-gray-50 ">
+      <Pressable className="border border-gray-300/70 rounded-lg p-4 flex flex-row item-center gap-x-2 active:bg-gray-50 ">
         <ExpoImage
           className="bg-purple-50 rounded-full"
           source={formatPokemonSpriteUrl(id)}
@@ -39,7 +39,7 @@ export function PokemonItem(props: PokemonItemProps) {
         </View>
 
         <Pressable
-          className="items-center justify-center aspect-square"
+          className="items-center justify-center aspect-square rounded-full active:bg-rose-50/40"
           onPress={() => toggleFavorite({ id, name })}
         >
           <Ionicons
@@ -48,7 +48,7 @@ export function PokemonItem(props: PokemonItemProps) {
             color={isFavorite(id) ? "#f87171" : "#9ca3af"}
           />
         </Pressable>
-      </View>
+      </Pressable>
     </Link>
   );
 }
