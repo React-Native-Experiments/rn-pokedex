@@ -1,21 +1,20 @@
-import { GenericResource } from "@/types/resource";
 import { FlashList, ListRenderItem } from "@shopify/flash-list";
 import { View } from "react-native";
 
-interface PokemonListProps {
-  data: GenericResource[];
-  renderItem: ListRenderItem<GenericResource>;
-  onEndReached: () => void;
+interface PokemonListProps<T> {
+  data: T[];
+  renderItem: ListRenderItem<T>;
+  onEndReached?: () => void;
 }
 
-export function PokemonList(props: PokemonListProps) {
+export function PokemonList<T>(props: PokemonListProps<T>) {
   const { data, renderItem, onEndReached } = props;
 
   return (
     <FlashList
       data={data}
       renderItem={renderItem}
-      keyExtractor={(item) => item.url}
+      keyExtractor={(_, index) => String(index)}
       ItemSeparatorComponent={() => <View style={{ height: 8 }} />}
       contentContainerStyle={{ paddingBottom: 70 }}
       onEndReached={onEndReached}
